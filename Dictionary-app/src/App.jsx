@@ -8,7 +8,7 @@ function App() {
     <div className="App">
     <header className='App-header'>
       <img src={logo} className="App-logo img-fluid" alt="Logo" />
-   <a href="#" className='btn btn-primary shadow'>Hello</a>
+   <a href="#" className='btn btn-primary shadow'>Hi</a>
     </header>
    </div>
   )
