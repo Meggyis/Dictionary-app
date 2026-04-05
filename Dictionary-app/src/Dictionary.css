@@ -42,7 +42,6 @@
     margin-top: 20px;
     transition: all 0.3s ease;
 }
-
 .reset-btn:hover {
     background: #667eea;
     color: white;
@@ -58,7 +57,6 @@
     margin-left: 10px;
     transition: all 0.3s ease;
 }
-
 .listen-button:hover {
     background: #667eea;
     color: white;
@@ -72,7 +70,6 @@
 .gallery {
     margin-top: 20px;
 }
-
 .gallery img {
     width: 100%;
     height: 200px;
@@ -81,7 +78,6 @@
     margin-bottom: 15px;
     transition: transform 0.3s ease;
 }
-
 .gallery img:hover {
     transform: scale(1.03);
 }
@@ -90,35 +86,28 @@
         margin-top: 20px;
         padding: 0 15px;
     }
-    
     .Dictionary h2 {
         font-size: 24px;
     }
-    
     .Dictionary h3 {
         font-size: 18px;
     }
-    
     .Dictionary section {
         padding: 20px;
     }
-    
     .input-group {
         flex-direction: column;
     }
-    
     .input-group .btn {
         width: 100%;
         margin-top: 8px;
         border-radius: 6px !important;
     }
-    
     .reset-button {
         width: 100%;
         float: none;
         margin-bottom: 40px;
     }
-    
     .listen-button {
         width: 100%;
         margin-left: 0;
