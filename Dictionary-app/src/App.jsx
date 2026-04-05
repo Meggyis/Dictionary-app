@@ -10,7 +10,9 @@ function App() {
       <div className='container'>
     <header className='App-header'>
       <img src={logo} className="App-logo img-fluid" alt="Logo" />
-    <h1>Dictionary App</h1>
+      <br />
+      <br />
+    <h5>What word do you want to look up?</h5>
     </header>
     <main>
       <Dictionary />

@@ -30,7 +30,7 @@ if (props.results) {
                       </section>
                 );
             })}
-            
+
             {/* synonyms */}
                 {props.synonyms?.length > 0 && (
                     <section>
@@ -41,7 +41,7 @@ if (props.results) {
                 </section>
              )}        
         </div>
-        
+
     );
        } else {
             return null;

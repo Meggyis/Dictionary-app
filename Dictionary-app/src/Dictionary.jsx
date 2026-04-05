@@ -3,16 +3,19 @@ import axios from "axios";
 import "./Dictionary.css";
 import Results from "./Results";
 
+
 export default function Dictionary() {
     const [word, setWord] = useState("");
     const [results, setResults] = useState(null);
     const [phonetic, setPhonetic] = useState(null);
     const [synonyms, setSynonyms] = useState([]);
+    const [images, setImages] = useState([]);
    
     function reset() {
         setResults(null);
         setPhonetic(null);
         setSynonyms([]);
+        setImages([]);
         setWord("");
 }
 
@@ -24,18 +27,25 @@ export default function Dictionary() {
          if (!word.trim()) {
         return;
     }
+
         let apiKey = "ta7cf76b03d3d0cfof27fb0472606ea4";
         let shecodesUrl = `https://api.shecodes.io/dictionary/v1/define?word=${word}&key=${apiKey}`;
         let dictionaryUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
         axios.get(shecodesUrl).then(handleResponse);
         axios.get(dictionaryUrl).then(handleDictionaryResponse);
+        let pexelsApiKey = "g4wVBiWvctAk23Wv10DJ2F2uFsDxlW4N5ZFjWXnDWOwF9yPbTESE5Ubs";
+        let pexelsUrl =`https://api.pexels.com/v1/search?query=${word}&per_page=8`;
+        let headers = { Authorization: ` ${pexelsApiKey}` };
+        axios.get(pexelsUrl, { headers: headers}).then(handlePexelsResponse);
     }
-
+    function handlePexelsResponse(response) {
+        console.log(response.data);
+        setImages(response.data.photos);
+}
     function handleDictionaryResponse(response) {
         setPhonetic(response.data[0].phonetics[0].text);
         setSynonyms(response.data[0].meanings[0].definitions[0].synonyms);
     }
-
     function handleWordChange(event) {
         setWord(event.target.value);
     }
@@ -65,6 +75,21 @@ export default function Dictionary() {
             phonetic={phonetic}
             synonyms={synonyms}
         />
+        {images.length > 0 && (
+            <section className="gallery">
+                <div className="row">
+                    {images.map((image, index) => (
+                        <div key={index} className="col-12 col-md-6 col-lg-4">
+                            <img 
+                                src={image.src.medium} 
+                                alt={image.alt}
+                                className="img-fluid rounded mb-3"
+                            />
+                        </div>
+                    ))}
+                </div>
+            </section>
+        )}
     </div>
 );
 }
