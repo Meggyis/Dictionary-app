@@ -1,11 +1,14 @@
 .Dictionary {
-    text-align: center;
+    text-align: left;
     margin-top: 50px;
+}
+.Dictionary h1 {
+    font-size: 12px;
+    margin-bottom: 10px;
 }
 .App-logo {
     max-width:200px;
     height: auto;
-    display: block;
     margin: 0 auto;
 }
 .App-footer {
