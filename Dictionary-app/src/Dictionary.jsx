@@ -31,7 +31,7 @@ export default function Dictionary() {
         axios.get(shecodesUrl).then(handleResponse);
         axios.get(dictionaryUrl).then(handleDictionaryResponse);
         let pexelsApiKey = "g4wVBiWvctAk23Wv10DJ2F2uFsDxlW4N5ZFjWXnDWOwF9yPbTESE5Ubs";
-        let pexelsUrl =`https://api.pexels.com/v1/search?query=${word}&per_page=8`;
+        let pexelsUrl =`https://api.pexels.com/v1/search?query=${word}&per_page=9`;
         let headers = { Authorization: ` ${pexelsApiKey}` };
         axios.get(pexelsUrl, { headers: headers}).then(handlePexelsResponse);
     }
