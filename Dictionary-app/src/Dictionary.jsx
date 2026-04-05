@@ -9,21 +9,29 @@ export default function Dictionary() {
     const [phonetic, setPhonetic] = useState(null);
     const [synonyms, setSynonyms] = useState([]);
    
-     function handleResponse(response) {
+    function reset() {
+        setResults(null);
+        setPhonetic(null);
+        setSynonyms([]);
+        setWord("");
+}
+
+    function handleResponse(response) {
         setResults(response.data); 
     }
     function search(event) {
         event.preventDefault();
+         if (!word.trim()) {
+        return;
+    }
         let apiKey = "ta7cf76b03d3d0cfof27fb0472606ea4";
         let shecodesUrl = `https://api.shecodes.io/dictionary/v1/define?word=${word}&key=${apiKey}`;
         let dictionaryUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
-    
         axios.get(shecodesUrl).then(handleResponse);
         axios.get(dictionaryUrl).then(handleDictionaryResponse);
     }
 
     function handleDictionaryResponse(response) {
-        console.log(response.data[0].meanings[0].definitions[0]);
         setPhonetic(response.data[0].phonetics[0].text);
         setSynonyms(response.data[0].meanings[0].definitions[0].synonyms);
     }
@@ -31,17 +39,32 @@ export default function Dictionary() {
     function handleWordChange(event) {
         setWord(event.target.value);
     }
- 
-  return (
+   return (
     <div className="Dictionary">
-<form onSubmit={search}>
-    <input type="search" className="form-control shadow" onChange={handleWordChange} />
-</form>
-   <Results 
-    results={results} 
-    phonetic={phonetic}
-    synonyms={synonyms}
-/>
+        <form onSubmit={search}>
+            <div className="input-group">
+            <input 
+                type="search" 
+                className="form-control shadow" 
+                onChange={handleWordChange}
+                value={word}
+                placeholder="Search a word..."
+            />
+            <button type="submit" className="btn btn-primary shadow">
+                🔍
+            </button>
+        </div>
+        </form>
+        {results && (
+            <button onClick={reset} className="btn reset-button shadow">
+                🔄 Search again
+            </button>
+        )}
+        <Results 
+            results={results} 
+            phonetic={phonetic}
+            synonyms={synonyms}
+        />
     </div>
-  );
+);
 }

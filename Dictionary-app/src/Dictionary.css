@@ -6,6 +6,20 @@
     font-size: 12px;
     margin-bottom: 10px;
 }
+.Dictionary section {
+    background:white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+.Dictionary input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
 .App-logo {
     max-width:200px;
     height: auto;
@@ -14,4 +28,80 @@
 .App-footer {
     text-align: center;
     margin-top: 50px;
+}
+.reset-btn {
+    background: transparent;
+    color: #667eea;
+    border: 2px solid #667eea;
+    padding: 10px 28px;
+    border-radius: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+.reset-btn:hover {
+    background: #667eea;
+    color: white;
+}
+.listen-button {
+    background: transparent;
+    color: #667eea;
+    border: 2px solid #667eea;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: all 0.3s ease;
+}
+
+.listen-button:hover {
+    background: #667eea;
+    color: white;
+}
+.reset-button {
+    float: right;
+    margin-bottom: 10px;
+}
+@media (max-width: 768px) {
+    .Dictionary {
+        margin-top: 20px;
+        padding: 0 15px;
+    }
+    
+    .Dictionary h2 {
+        font-size: 24px;
+    }
+    
+    .Dictionary h3 {
+        font-size: 18px;
+    }
+    
+    .Dictionary section {
+        padding: 20px;
+    }
+    
+    .input-group {
+        flex-direction: column;
+    }
+    
+    .input-group .btn {
+        width: 100%;
+        margin-top: 8px;
+        border-radius: 6px !important;
+    }
+    
+    .reset-button {
+        width: 100%;
+        float: none;
+        margin-bottom: 10px;
+    }
+    
+    .listen-button {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 10px;
+    }
 }
