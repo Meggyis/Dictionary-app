@@ -6,7 +6,7 @@ export default function Results(props) {
     window.speechSynthesis.speak(speech);
 }
    
-if (props.results) {
+if (props.results && props.results.meanings) {
     return (
         <div className="Results">
             <section>

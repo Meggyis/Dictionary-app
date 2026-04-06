@@ -19,7 +19,11 @@ export default function Dictionary() {
         setSearched(false);
 }
     function handleResponse(response) {
-        setResults(response.data); 
+      if (response.data && response.data.meanings) {
+        setResults(response.data);
+    } else {
+        setResults(null);
+    }
     }
     function search(event) {
         event.preventDefault();
@@ -32,6 +36,10 @@ export default function Dictionary() {
         let dictionaryUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
         axios.get(shecodesUrl).then(handleResponse).catch(() => {
             setResults(null);
+            setPhonetic(null);
+        setSynonyms([]);
+        setImages([]);
+        setSearched(true);
         });
         axios.get(dictionaryUrl).then(handleDictionaryResponse).catch(() => {
             setPhonetic(null);
@@ -49,8 +57,13 @@ export default function Dictionary() {
         setImages(response.data.photos);
     }
     function handleDictionaryResponse(response) {
+     try {
         setPhonetic(response.data[0].phonetics[0].text);
         setSynonyms(response.data[0].meanings[0].definitions[0].synonyms);
+    } catch (e) {
+        setPhonetic(null);
+        setSynonyms([]);
+    }
     }
     function handleWordChange(event) {
         setWord(event.target.value);
@@ -84,7 +97,7 @@ export default function Dictionary() {
             phonetic={phonetic}
             synonyms={synonyms}
         />
-        {images.length > 0 && (
+        {results && images.length > 0 && (
             <section className="gallery">
                 <div className="row">
                     {images.map((image, index) => (
