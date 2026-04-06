@@ -9,13 +9,14 @@ export default function Dictionary() {
     const [phonetic, setPhonetic] = useState(null);
     const [synonyms, setSynonyms] = useState([]);
     const [images, setImages] = useState([]);
-   
+    const [searched, setSearched] = useState(false);  
     function reset() {
         setResults(null);
         setPhonetic(null);
         setSynonyms([]);
         setImages([]);
         setWord("");
+        setSearched(false);
 }
     function handleResponse(response) {
         setResults(response.data); 
@@ -25,6 +26,7 @@ export default function Dictionary() {
          if (!word.trim()) {
         return;
     }
+        setSearched(true);
         let apiKey = "ta7cf76b03d3d0cfof27fb0472606ea4";
         let shecodesUrl = `https://api.shecodes.io/dictionary/v1/define?word=${word}&key=${apiKey}`;
         let dictionaryUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
@@ -74,7 +76,7 @@ export default function Dictionary() {
                 🔄 Search again
             </button>
         )}
-        {!results && word && (
+        {searched && !results && word && (
         <p className="text-danger mt-3">Word not found, please try again!</p>
     )}
         <Results 
