@@ -28,12 +28,19 @@ export default function Dictionary() {
         let apiKey = "ta7cf76b03d3d0cfof27fb0472606ea4";
         let shecodesUrl = `https://api.shecodes.io/dictionary/v1/define?word=${word}&key=${apiKey}`;
         let dictionaryUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
-        axios.get(shecodesUrl).then(handleResponse);
-        axios.get(dictionaryUrl).then(handleDictionaryResponse);
+        axios.get(shecodesUrl).then(handleResponse).catch(() => {
+            setResults(null);
+        });
+        axios.get(dictionaryUrl).then(handleDictionaryResponse).catch(() => {
+            setPhonetic(null);
+            setSynonyms([]);
+        });
         let pexelsApiKey = "g4wVBiWvctAk23Wv10DJ2F2uFsDxlW4N5ZFjWXnDWOwF9yPbTESE5Ubs";
         let pexelsUrl =`https://api.pexels.com/v1/search?query=${word}&per_page=9`;
         let headers = { Authorization: ` ${pexelsApiKey}` };
-        axios.get(pexelsUrl, { headers: headers}).then(handlePexelsResponse);
+        axios.get(pexelsUrl, { headers: headers}).then(handlePexelsResponse).catch(() => {
+            setImages([]);
+        });
     }
     function handlePexelsResponse(response) {
         console.log(response.data);
@@ -67,6 +74,9 @@ export default function Dictionary() {
                 🔄 Search again
             </button>
         )}
+        {!results && word && (
+        <p className="text-danger mt-3">Word not found, please try again!</p>
+    )}
         <Results 
             results={results} 
             phonetic={phonetic}
